@@ -1,10 +1,11 @@
-fid   = fopen('ex3.msh','r');%give filename
+fid   = fopen('ex4.msh','r');%give filename
 tline = fgetl(fid);%read 1st line
 
 T.Edges      = [];
 T.FBndyEdges = zeros(0,1);
 T.EdgeEls    = zeros(0,2);
 
+bd = []
 while ischar(tline)
     disp(tline)%display the line
     tline = fgetl(fid);%read another line
@@ -39,7 +40,7 @@ while ischar(tline)
                     k = size(T.Edges,1)+1;
                     T.Edges(k,:) = data([6,7]);%append to T.Edges
                     l = size(T.FBndyEdges,1)+1;
-                    T.FBndyEdges(l) = k;%append to T.FBndyEdges
+                    T.FBndyEdges(l,1) = k;%append to T.FBndyEdges
                     T.EdgeEls(k,2)  = -l;%add info to T.EdgeEls at (k,2)
                 end
             elseif data(2) == 2%if it is triangle
